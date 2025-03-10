@@ -49,7 +49,7 @@ def numero_sistemas():
     juegos_totales = 0
 
     try:
-        with open ("datos.txt","r") as file:
+        with open ("datos.txt","r",encoding="UTF8") as file:
             for f in file:
                 index = index + 1
                 if index == 1:
@@ -126,7 +126,7 @@ def grabar():
     #compruebo que almenos se halla introducido el nombre del juego y la consola
     if consola != "" and nombre != "":
         #abro el fichero y escribo las variables ya asignadas
-        with open("datos.txt","a") as file:
+        with open("datos.txt","a",encoding="UTF8") as file:
             file.write(f"{index}\n")
             file.write(f"{consola}\n")
             file.write(f"{nombre}\n")
@@ -143,7 +143,7 @@ def grabar():
 def posicion():
     index = 0
     try:
-        with open("datos.txt","r") as file:
+        with open("datos.txt","r",encoding="UTF8") as file:
             for f in file:
                 index = index + 1
                 if index == 1:
@@ -199,7 +199,7 @@ def listadoF():
     
     if opcion==1 and entrada=="":
         try:
-            with open("datos.txt","r") as file:
+            with open("datos.txt","r",encoding="UTF8") as file:
                 for f in file:
                     index=index+1
                     if index == 1:
@@ -227,7 +227,7 @@ def listadoF():
     if opcion==2:
         num = 0
         try:
-            with open ("datos.txt","r") as file:
+            with open ("datos.txt","r",encoding="UTF8") as file:
                 for f in file:
                     num = num + 1
                     if num == 2:
@@ -246,7 +246,7 @@ def listadoF():
         try:
             for t in total_sistemas:
                 if t == f"{entrada}\n":
-                    with open("datos.txt","r") as file:
+                    with open("datos.txt","r",encoding="UTF8") as file:
                         for f in file:
                             index=index+1
                             if index == 1:
@@ -278,7 +278,7 @@ def listadoF():
     if opcion==3:
         num = 0
         try:
-            with open ("datos.txt","r") as file:
+            with open ("datos.txt","r",encoding="UTF8") as file:
                 for f in file:
                     num = num + 1
                     if num == 4:
@@ -295,7 +295,7 @@ def listadoF():
         try:
             for t in total_genero:
                 if t == f"{entrada}\n":
-                    with open("datos.txt","r") as file:
+                    with open("datos.txt","r",encoding="UTF8") as file:
                         for f in file:
                             index=index+1
                             if index == 1:
@@ -350,7 +350,7 @@ def borrar_buscar():
     indice = indice_borrar.get()
     Button(bg="white",fg="black",text="NO ENCUENTRO EL INDICE",justify="left").place(x=331,y=300)
     try:
-        with open("datos.txt","r") as file:
+        with open("datos.txt","r",encoding="UTF8") as file:
             for f in file:
                 index=index+1
                 if index == 1:
@@ -372,8 +372,8 @@ def borrar_def():
     index = 0
     indice = indice_borrar.get()
     try:
-        with open ("datos.txt","r") as file_uno:
-            with open ("datos.tmp","w") as file_dos:
+        with open ("datos.txt","r",encoding="UTF8") as file_uno:
+            with open ("datos.tmp","w",encoding="UTF8") as file_dos:
                 for f_uno in file_uno:
                     index = index + 1
                     if index == 1:
@@ -397,8 +397,8 @@ def borrar_def():
                             file_dos.write(imagen)
                             file_dos.write(sinopsis)
         index = 0
-        with open ("datos.tmp","r") as file_uno:
-            with open ("datos.txt","w") as file_dos:
+        with open ("datos.tmp","r",encoding="UTF8") as file_uno:
+            with open ("datos.txt","w",encoding="UTF8") as file_dos:
                 for f_uno in file_uno:
                     index = index + 1
                     if index == 1:
@@ -476,7 +476,7 @@ def j_c():
     #declaro el achivo abierto como comun para poder utilizarlos en otra funcion
     global file
     try:
-        file = open ("datos.txt","r")
+        file = open ("datos.txt","r",encoding="UTF8")
     except:
         pass
 
@@ -501,7 +501,7 @@ def j_cMostrartodos():
         vent.place(x=500,y=190)
         try:
             print (imagen)
-            with open(imagen[:len(imagen)-1],"r") as datos_imag:
+            with open(imagen[:len(imagen)-1],"r",encoding="UTF8") as datos_imag:
                 pass
             im = Image.open(imagen[:len(imagen)-1])
         except:
@@ -525,7 +525,7 @@ def bj_jc():
     index = 0
     nombre = nombre_jc.get()
     try:   
-        with open ("datos.txt","r") as file:
+        with open ("datos.txt","r",encoding="UTF8") as file:
             for f in file:
                 index = index + 1
                 if index == 2 :
@@ -575,7 +575,7 @@ def j_h():
 
     #creo el menu para ventana juegos. para insertar el juego escrito en los entris hay que pulsar grabar   
     Button(ventana,text="MENU PRINCIPAL",justify="left",command=videojuegos_menu).place(x=340,y=550)
-    Label(ventana,bg="black",fg="white",text=" JUEGO Y CARATULAS ",font=("Arial","20")).place(x=240,y=20)
+    Label(ventana,bg="black",fg="white",text="  JUEGO AL HAZAR  ",font=("Arial","20")).place(x=240,y=20)
     Label(ventana,bg="black",fg="white",text="CONSOLA VIDEO JUEGOS",font=("Arial","12")).place(x=40,y=70)
     Label(ventana,bg="black",fg="white",text="JUEGO",font=("Arial","12")).place(x=40,y=100)
     Label(ventana,bg="black",fg="white",text="GENERO",font=("Arial","12")).place(x=40,y=130)
@@ -595,7 +595,7 @@ def j_h():
     texto_jh.pack()
     #miro los dato que hay en el archibo y lo divido entre seis. lo que me da los juegos que hay
     try:
-        with open ("datos.txt","r") as file:
+        with open ("datos.txt","r",encoding="UTF8") as file:
             for f in file :
                 index = index + 1 
             num =  index / 6
@@ -605,7 +605,7 @@ def j_h():
 
         index = 0
         datos = 0
-        with open ("datos.txt","r") as file:
+        with open ("datos.txt","r",encoding="UTF8") as file:
             for f in file :
                 index = index + 1 
                 if index == 1:
