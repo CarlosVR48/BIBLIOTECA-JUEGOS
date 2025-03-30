@@ -1,3 +1,5 @@
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 from tkinter import *
 from PIL import Image,ImageTk
 import random
@@ -39,7 +41,8 @@ def videojuegos_menu():
     Button(menu,text="BORRAR",justify="left",command=borrar_juegos).place(x=220,y=550)
     Button(menu,text="SALIR",justify="left",command=salir_juegos).place(x=720,y=550)
     Button(menu,text="JUEGO Y CARATULA",justify="left",command=j_c).place(x=295,y=550)
-    Button(menu,text="JUEGO AL HAZAR",justify="left",command=j_h).place(x=435,y=550)
+    Button(menu,text="JUEGO AL AZAR",justify="left",command=j_h).place(x=435,y=550)
+    Button(menu,text="GENERAR PDF",justify="left",command=generar_pdf).place(x=550,y=550)
 
 #funcion para saber todos los sistemas y juegos que tienes almacenados 
 def numero_sistemas():
@@ -155,7 +158,48 @@ def posicion():
             
     return (posicion)        
 
+
 #----------------------------------------------------------------------------------------------------------
+#codigo generar_pdf
+
+def generar_pdf():
+    index = 0
+    linea = 804
+    cantidad = 0
+    c=canvas.Canvas("biblioteca.pdf")
+    c.setLineWidth(.3)
+    c.setFont("Helvetica",14)
+    c.drawString(200,815,"LISTADO DE VIDEOJUEGOS")
+    with open("datos.txt","r",encoding="UTF8") as file:
+        for f in file:
+            index=index +1
+            if index == 1:
+                indice = f
+            if index == 2:
+                consola = f
+            if index == 3:
+                nombre = f
+            if index == 4:
+                genero = f
+            if index == 5:
+                pass
+            if  index == 6:
+                index = 0
+                texto = (f"{indice}  {consola} {nombre} {genero}")
+                cantidad = cantidad + 1
+
+                if cantidad  == 38 :
+                    c.showPage()
+                    cantidad = 0
+                    linea = 804                
+
+                linea = linea - 20
+
+                c.drawString(10,linea,texto)
+
+    c.save()
+
+# #----------------------------------------------------------------------------------------------------------
 #codigo listar juegos
 
 def listar_juegos():
@@ -575,7 +619,7 @@ def j_h():
 
     #creo el menu para ventana juegos. para insertar el juego escrito en los entris hay que pulsar grabar   
     Button(ventana,text="MENU PRINCIPAL",justify="left",command=videojuegos_menu).place(x=340,y=550)
-    Label(ventana,bg="black",fg="white",text="  JUEGO AL HAZAR  ",font=("Arial","20")).place(x=240,y=20)
+    Label(ventana,bg="black",fg="white",text="  JUEGO AL AZAR  ",font=("Arial","20")).place(x=240,y=20)
     Label(ventana,bg="black",fg="white",text="CONSOLA VIDEO JUEGOS",font=("Arial","12")).place(x=40,y=70)
     Label(ventana,bg="black",fg="white",text="JUEGO",font=("Arial","12")).place(x=40,y=100)
     Label(ventana,bg="black",fg="white",text="GENERO",font=("Arial","12")).place(x=40,y=130)
